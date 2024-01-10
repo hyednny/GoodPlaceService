@@ -1,10 +1,7 @@
-import express from "express";
-import routes from "./routes";
+import { initializeServer } from "./loader/express";
 
 export function initializeSever() {
-  const app = express();
-
-  routes(app);
+  const app = initializeServer();
 
   return app;
 }

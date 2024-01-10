@@ -9,7 +9,7 @@ const app = initializeSever();
 const initialize = async () => {
   try {
     app.listen(port, async () => {
-      log.info("PlaceListService server is running");
+      log.info(`PlaceListService server is running. http://localhost:${port}`);
       await connectToDatabase();
     });
   } catch (e) {
