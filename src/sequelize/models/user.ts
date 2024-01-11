@@ -24,7 +24,8 @@ export interface UserAttributes extends UserCreateAttributes {
 export class User extends Model<UserAttributes, UserCreateAttributes> {
   /* Column */
 
-  @Column({ type: DataType.INTEGER, primaryKey: true })
+  @PrimaryKey
+  @Column({ type: DataType.INTEGER })
   declare id: number;
 
   @Column({ type: DataType.STRING })
