@@ -4,8 +4,7 @@ import { Router } from "express";
 
 export const UserRouter = Router();
 
-// const privateKey = config.get<string>("PRIVATE_KEY");
-const privateKey = "superSecret";
+const privateKey = config.get<string>("PRIVATE_KEY");
 
 UserRouter.get("/");
 UserRouter.post("/login", (req, res) => {

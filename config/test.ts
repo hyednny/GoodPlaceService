@@ -10,5 +10,5 @@ export default {
   DB_PORT: process.env.DB_PORT,
 
   // Jsonwebtoken
-  // PUBLIC_KEY:
+  PRIVATE_KEY: process.env.PRIVATE_KEY,
 };
