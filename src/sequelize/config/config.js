@@ -8,6 +8,11 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: "mysql",
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: true,
+      },
+    },
     timezone: process.env.DB_TIMEZONE,
   },
   test: {
@@ -17,6 +22,11 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: "mysql",
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: true,
+      },
+    },
     timezone: process.env.DB_TIMEZONE,
   },
   production: {
@@ -26,6 +36,11 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: "mysql",
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: true,
+      },
+    },
     timezone: process.env.DB_TIMEZONE,
   },
 };

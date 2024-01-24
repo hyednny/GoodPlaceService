@@ -12,7 +12,8 @@ export async function connectToDatabase() {
     log.info("Database Connection has been established successfully");
 
     log.info("Syncing the database...");
-    await sequelize.sync();
+    await sequelize.sync({ force: false });
+    // true -> 항상 테이블 삭제 후 재생성, false -> 테이블이 존재하면 넘어가고 없으면 생성
     log.info("Syncing completed successfully");
   } catch (e: any) {
     log.error(e);

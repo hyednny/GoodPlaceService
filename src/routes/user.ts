@@ -8,8 +8,14 @@ const privateKey = config.get<string>("PRIVATE_KEY");
 
 UserRouter.get("/");
 UserRouter.post("/login", (req, res) => {
-  const user = { name: req.body.name };
+  const user = { name: req.body.name, password: req.body.password };
 
   const accessToken = jwt.sign(user, privateKey);
-  res.json({ accessToken });
+  return res.status(200).json({
+    code: 200,
+    message: "Token is created",
+    accessToken,
+  });
 });
+
+UserRouter.post("/register", (req, res) => {});

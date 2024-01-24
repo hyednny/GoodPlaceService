@@ -11,6 +11,7 @@ import { randomId } from "../../utils/helper";
 export interface UserCreateAttributes {
   id: number;
   name: string;
+  userId: string;
   password: string;
   geo: GeometryDataType;
   address: string;
@@ -31,6 +32,9 @@ export class User extends Model<UserAttributes, UserCreateAttributes> {
 
   @Column({ type: DataType.STRING })
   declare name: string;
+
+  @Column({ type: DataType.STRING })
+  declare userId: string;
 
   @Column({ type: DataType.STRING })
   declare password: string;
