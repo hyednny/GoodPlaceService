@@ -25,6 +25,10 @@ export function initializeServer() {
   app.all("/ping", (_req: Request, res: Response) => res.sendStatus(200));
   app.get("/signup", (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../template", "/signup.html"));
+    res.setHeader(
+      "Content-Security-Policy",
+      "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net"
+    );
   });
   app.post("/signup", (req: Request, res: Response) => {
     console.log(req.body);

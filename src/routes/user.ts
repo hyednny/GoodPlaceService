@@ -1,6 +1,7 @@
 import config from "config";
 import jwt from "jsonwebtoken";
 import { Router } from "express";
+import UserController from "../controller/user";
 
 export const UserRouter = Router();
 
@@ -18,4 +19,6 @@ UserRouter.post("/login", (req, res) => {
   });
 });
 
-UserRouter.post("/register", (req, res) => {});
+UserRouter.post("/register", (req, res) => {
+  console.log(req.body);
+});
