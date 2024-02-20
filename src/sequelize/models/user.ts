@@ -9,12 +9,9 @@ import {
 import { randomId } from "../../utils/helper";
 
 export interface UserCreateAttributes {
-  id: number;
   name: string;
   userId: string;
   password: string;
-  geo: GeometryDataType;
-  address: string;
 }
 
 export interface UserAttributes extends UserCreateAttributes {
