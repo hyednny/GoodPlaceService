@@ -17,19 +17,31 @@
     </form>
   
     <script>
-        const form = document.forms['signup-form'];
-        async function signupClick() {
-             console.log('버튼이 눌렸습니다')
-      const res = await axios({
-        method: 'POST',
-        url: 'user/register',
-        data: {
-          name: form.name.value,
-          userId: form.userId.value,
-          password: form.password.value
-        }
-      })
-         }
+      const form = document.forms['signup-form'];
+  
+      const signupClick = async () => {
+        try {
+         const res = await axios.post('user/register', {
+            name: form.name.value,
+            userId: form.userId.value,
+            password: form.password.value
+         })
+         console.log(res.data)
+        } catch (error) {
+          if (error.response) {
+            if (error.response.status === 400) {
+              console.error('Error 400:', error.response.data);
+
+              alert(error.response.data.message);
+            } else {
+              console.error('Error during POST request:', error.response);
+              }
+          } else {
+              console.error('No response from the server. Check your network connection.');
+            }
+        }   
+      }
+
     </script>
   </body>
 </html>

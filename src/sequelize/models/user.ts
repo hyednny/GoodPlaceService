@@ -23,13 +23,10 @@ export interface UserAttributes extends UserCreateAttributes {
 export class User extends Model<UserAttributes, UserCreateAttributes> {
   /* Column */
 
-  @PrimaryKey
-  @Column({ type: DataType.INTEGER })
-  declare id: number;
-
   @Column({ type: DataType.STRING })
   declare name: string;
 
+  @PrimaryKey
   @Column({ type: DataType.STRING })
   declare userId: string;
 

@@ -1,9 +1,14 @@
+import { Router } from "express";
+import { Container } from "typedi";
 import config from "config";
 import jwt from "jsonwebtoken";
-import { Router } from "express";
 import UserController from "../controller/user";
+import requestValidator from "../middleware/requestValidator";
+import { createUserSchema } from "../schema/user";
+import { requestHandler } from "../utils/helper";
 
 export const UserRouter = Router();
+const controller = Container.get(UserController);
 
 const privateKey = config.get<string>("PRIVATE_KEY");
 
@@ -19,6 +24,8 @@ UserRouter.post("/login", (req, res) => {
   });
 });
 
-UserRouter.post("/register", (req, res) => {
-  console.log(req.body);
-});
+UserRouter.post(
+  "/register",
+  requestValidator(createUserSchema),
+  requestHandler(controller.createUserHandler)
+);

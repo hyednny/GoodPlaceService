@@ -3,16 +3,11 @@ import { Inject, Service } from "typedi";
 import { User } from "../sequelize/models/user";
 import { CreateUserRequestType } from "../schema/user";
 import UserService from "../service/user";
+import { makeResponse } from "../utils/helper";
 
 @Service()
 export default class UserController {
   @Inject(() => UserService) private userService!: UserService;
-  // createUserHandler = async (Request: { body: any }) => {
-  //   console.log(Request.body);
-  //   const { name, userId, password } = Request.body
-  //   await User.create({ name, userId, password })
-
-  // };
 
   createUserHandler = async (
     req: Request<
@@ -22,6 +17,12 @@ export default class UserController {
     >,
     res: Response
   ) => {
-    return await this.userService.createUser(req.body);
+    const userCheck = await this.userService.getUser(req.body.userId);
+
+    if (userCheck) return makeResponse(res, false, "아이디가 존재합니다.", 400);
+
+    const user = await this.userService.createUser(req.body);
+
+    return makeResponse(res, true, "회원가입이 되었습니다.", 201, user);
   };
 }
