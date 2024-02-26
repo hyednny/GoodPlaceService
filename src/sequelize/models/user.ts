@@ -1,4 +1,3 @@
-import { GeometryDataType } from "sequelize";
 import {
   Column,
   DataType,
@@ -17,24 +16,22 @@ export interface UserCreateAttributes {
 export interface UserAttributes extends UserCreateAttributes {
   invited: string;
   createdAt: Date;
+  updatedAt: Date;
 }
 
 @Table({ tableName: "user" })
 export class User extends Model<UserAttributes, UserCreateAttributes> {
   /* Column */
 
-  @Column({ type: DataType.STRING })
-  declare name: string;
-
   @PrimaryKey
   @Column({ type: DataType.STRING })
   declare userId: string;
 
   @Column({ type: DataType.STRING })
-  declare password: string;
+  declare name: string;
 
-  @Column({ type: DataType.GEOMETRY("POINT") })
-  declare geo: string;
+  @Column({ type: DataType.STRING })
+  declare password: string;
 
   @Column({
     type: DataType.STRING,
