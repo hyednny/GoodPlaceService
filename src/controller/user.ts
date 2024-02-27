@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { Inject, Service } from "typedi";
-import { User } from "../sequelize/models/user";
 import { CreateUserRequestType } from "../schema/user";
 import UserService from "../service/user";
 import { makeResponse } from "../utils/helper";

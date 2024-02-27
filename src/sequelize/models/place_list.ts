@@ -1,21 +1,23 @@
-import { GeometryDataType } from "sequelize";
 import {
+  AutoIncrement,
   Column,
   DataType,
+  ForeignKey,
   Model,
   PrimaryKey,
   Table,
 } from "sequelize-typescript";
-import { randomId } from "../../utils/helper";
+import { User } from "./user";
 
 export interface PlaceListCreateAttributes {
   userId: string;
   place: string;
   geo: string;
-  etc: string;
+  etc?: string;
 }
 
 export interface PlaceListAttributes extends PlaceListCreateAttributes {
+  id: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -30,6 +32,11 @@ export class PlaceList extends Model<
   /* Column */
 
   @PrimaryKey
+  @AutoIncrement
+  @Column({ type: DataType.INTEGER })
+  declare id: number;
+
+  @ForeignKey(() => User)
   @Column({ type: DataType.STRING })
   declare userId: string;
 
