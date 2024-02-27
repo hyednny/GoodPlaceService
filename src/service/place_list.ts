@@ -7,7 +7,9 @@ import PlaceListRepository from "../repository/place_list";
 export default class PlaceListService {
   @Inject(() => PlaceListRepository)
   private placeListRepository!: PlaceListRepository;
-  findAll = async (where?: WhereOptions<PlaceListAttributes>) => {
-    await this.placeListRepository.findAll(where);
+
+  getAllPlaceList = async (options: FindOptions<PlaceListAttributes>) => {
+    const placeList = await this.placeListRepository.findAll(options);
+    return placeList;
   };
 }

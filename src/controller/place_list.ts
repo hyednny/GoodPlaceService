@@ -16,6 +16,8 @@ export default class PlaceListController {
     >,
     res: Response
   ) => {
-    const list = await this.placeListService.findAll({ where: req.query });
+    req.query.userId !== undefined
+      ? await this.placeListService.getAllPlaceList({ where: req.query })
+      : undefined;
   };
 }

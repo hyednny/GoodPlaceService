@@ -4,18 +4,16 @@ import { Service } from "typedi";
 
 @Service()
 export default class PlaceListRepository {
-  findOne(id: number, options?: FindOptions<PlaceListAttributes>) {
+  findOne(id: number) {
     return PlaceList.findByPk(id, {
       attributes: { exclude: ["createdAt", "updatedAt"] },
-      ...options,
     });
   }
 
-  findAll(where?: WhereOptions<PlaceListAttributes>) {
+  findAll(options: FindOptions<PlaceListAttributes>) {
     return PlaceList.findAll({
-      where,
       attributes: { exclude: ["createdAt", "updatedAt"] },
-      order: [["place", "DESC"]],
+      ...options,
     });
   }
 }
