@@ -9,7 +9,10 @@ export default class PlaceListService {
   private placeListRepository!: PlaceListRepository;
 
   getAllPlaceList = async (options: FindOptions<PlaceListAttributes>) => {
-    const placeList = await this.placeListRepository.findAll(options);
-    return placeList;
+    return await this.placeListRepository.findAll(options);
+  };
+
+  getPlaceList = async (id: number) => {
+    return await this.placeListRepository.findByPk(id);
   };
 }

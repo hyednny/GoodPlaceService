@@ -4,7 +4,7 @@ import { Service } from "typedi";
 
 @Service()
 export default class PlaceListRepository {
-  findOne(id: number) {
+  findByPk(id: number) {
     return PlaceList.findByPk(id, {
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
