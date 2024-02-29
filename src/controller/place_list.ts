@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Inject, Service } from "typedi";
 import {
+  CreatePlaceListRequestType,
   GetAllPlaceListRequstType,
   GetPlaceListRequestType,
 } from "../schema/place_list";
@@ -28,7 +29,7 @@ export default class PlaceListController {
     return makeResponse(
       res,
       true,
-      "해당 유저가 등록한 리스트 출력되었습니다.",
+      "해당 유저가 등록한 리스트가 출력되었습니다.",
       201,
       placeList
     );
@@ -39,5 +40,36 @@ export default class PlaceListController {
     res: Response
   ) => {
     const placeList = await this.placeListService.getPlaceList(req.params.id);
+
+    return makeResponse(
+      res,
+      true,
+      "해당 ID에 대한 리스트가 출력되었습니다.",
+      201,
+      placeList
+    );
+  };
+
+  createPlaceListHandler = async (
+    req: Request<
+      CreatePlaceListRequestType["param"],
+      unknown,
+      CreatePlaceListRequestType["body"]
+    >,
+    res: Response
+  ) => {
+    const checkPlaceList = await this.placeListService.getPlaceList(
+      req.params.id
+    );
+
+    if (checkPlaceList)
+      return makeResponse(
+        res,
+        false,
+        "해당 ID에 대한 리스트가 존재합니다.",
+        400
+      );
+
+    const addPlaceList = await this.placeListService.creatPlaceList(req.body);
   };
 }

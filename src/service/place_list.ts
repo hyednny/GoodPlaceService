@@ -1,5 +1,8 @@
 import { FindOptions, WhereOptions } from "sequelize/types/model";
-import { PlaceListAttributes } from "../sequelize/models/place_list";
+import {
+  PlaceListAttributes,
+  PlaceListCreateAttributes,
+} from "../sequelize/models/place_list";
 import { Inject, Service } from "typedi";
 import PlaceListRepository from "../repository/place_list";
 
@@ -14,5 +17,12 @@ export default class PlaceListService {
 
   getPlaceList = async (id: number) => {
     return await this.placeListRepository.findByPk(id);
+  };
+
+  creatPlaceList = async (
+    attributes: PlaceListCreateAttributes
+    // attributes: Partial<Exclude<PlaceListCreateAttributes, "id">>
+  ) => {
+    const placeList = await this.placeListRepository.create(attributes);
   };
 }

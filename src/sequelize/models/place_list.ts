@@ -10,13 +10,13 @@ import {
 import { User } from "./user";
 
 export interface PlaceListCreateAttributes {
-  id: number;
   place: string;
   geo: string;
   etc?: string;
 }
 
 export interface PlaceListAttributes extends PlaceListCreateAttributes {
+  id: number;
   userId: string;
   createdAt: Date;
   updatedAt: Date;

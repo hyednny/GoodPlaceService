@@ -17,6 +17,13 @@ export const getPlaceListSchema = object({
 });
 
 export const createPlaceListSchema = object({
+  param: object({
+    id: string({ required_error: "Place List ID is required" })
+      .refine((value) => !isNaN(parseInt(value)), {
+        message: "Place List ID must be a number type",
+      })
+      .transform((value) => parseInt(value)),
+  }),
   body: object({
     place: string().optional(),
     geo: string(),

@@ -1,5 +1,9 @@
 import { FindOptions, WhereOptions } from "sequelize/types/model";
-import { PlaceList, PlaceListAttributes } from "../sequelize/models/place_list";
+import {
+  PlaceList,
+  PlaceListAttributes,
+  PlaceListCreateAttributes,
+} from "../sequelize/models/place_list";
 import { Service } from "typedi";
 
 @Service()
@@ -15,5 +19,9 @@ export default class PlaceListRepository {
       attributes: { exclude: ["createdAt", "updatedAt"] },
       ...options,
     });
+  }
+
+  create(attributes: PlaceListCreateAttributes) {
+    return PlaceList.create(attributes);
   }
 }
