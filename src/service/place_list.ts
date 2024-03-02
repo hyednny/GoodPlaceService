@@ -23,6 +23,6 @@ export default class PlaceListService {
     attributes: PlaceListCreateAttributes
     // attributes: Partial<Exclude<PlaceListCreateAttributes, "id">>
   ) => {
-    const placeList = await this.placeListRepository.create(attributes);
+    return await this.placeListRepository.create(attributes);
   };
 }

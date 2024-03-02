@@ -25,7 +25,7 @@ export const createPlaceListSchema = object({
       .transform((value) => parseInt(value)),
   }),
   body: object({
-    place: string().optional(),
+    place: string(),
     geo: string(),
     etc: string().optional(),
   }),
