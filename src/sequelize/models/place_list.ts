@@ -10,13 +10,13 @@ import {
 import { User } from "./user";
 
 export interface PlaceListCreateAttributes {
+  id: number;
   place: string;
-  geo: string;
+  geo?: string;
   etc?: string;
 }
 
 export interface PlaceListAttributes extends PlaceListCreateAttributes {
-  id: number;
   userId: string;
   createdAt: Date;
   updatedAt: Date;
@@ -43,7 +43,7 @@ export class PlaceList extends Model<
   @Column({ type: DataType.STRING })
   declare place: string;
 
-  @Column({ type: DataType.GEOMETRY("POINT") })
+  @Column({ type: DataType.GEOMETRY("POINT"), allowNull: true })
   declare geo: string;
 
   @Column({ type: DataType.STRING })

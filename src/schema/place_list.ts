@@ -1,4 +1,4 @@
-import { TypeOf, object, string } from "zod";
+import { TypeOf, number, object, string } from "zod";
 
 export const getAllPlaceListSchema = object({
   query: object({
@@ -17,16 +17,13 @@ export const getPlaceListSchema = object({
 });
 
 export const createPlaceListSchema = object({
-  param: object({
-    id: string({ required_error: "Place List ID is required" })
-      .refine((value) => !isNaN(parseInt(value)), {
-        message: "Place List ID must be a number type",
-      })
-      .transform((value) => parseInt(value)),
-  }),
   body: object({
+    id: number({
+      required_error: "PlaceList ID is required",
+      invalid_type_error: "PlaceList ID must be a number type",
+    }).positive({ message: "Invalid PlaceList ID" }),
     place: string(),
-    geo: string(),
+    geo: string().optional(),
     etc: string().optional(),
   }),
 });

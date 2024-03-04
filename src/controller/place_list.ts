@@ -7,9 +7,11 @@ import {
 } from "../schema/place_list";
 import PlaceListService from "../service/place_list";
 import { makeResponse } from "../utils/helper";
+import UserService from "../service/user";
 
 @Service()
 export default class PlaceListController {
+  @Inject(() => UserService) private userService!: UserService;
   @Inject(() => PlaceListService) private placeListService!: PlaceListService;
 
   getAllPlaceListHandler = async (
@@ -52,24 +54,14 @@ export default class PlaceListController {
 
   createPlaceListHandler = async (
     req: Request<
-      CreatePlaceListRequestType["param"],
+      Record<string, unknown>,
       unknown,
       CreatePlaceListRequestType["body"]
     >,
     res: Response
   ) => {
-    const checkPlaceList = await this.placeListService.getPlaceList(
-      req.params.id
-    );
+    const placeList = await this.placeListService.creatPlaceList(req.body);
 
-    if (checkPlaceList)
-      return makeResponse(
-        res,
-        false,
-        "해당 ID에 대한 리스트가 존재합니다.",
-        400
-      );
-
-    const addPlaceList = await this.placeListService.creatPlaceList(req.body);
+    return makeResponse(res, true, "리스트가 생성되었습니다.", 201, placeList);
   };
 }

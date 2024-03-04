@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import config from "config";
 import { User } from "./user";
+import { PlaceList } from "./place_list";
 
 const database = config.get<string>("DATABASE");
 const username = config.get<string>("DB_USERNAME");
@@ -17,7 +18,7 @@ export const sequelize = new Sequelize(database, username, password, {
     ],
     write: { host: config.get<string>("DB_HOST"), username, password },
   },
-  models: [User],
+  models: [User, PlaceList],
   pool: {
     max: 5,
     min: 0,

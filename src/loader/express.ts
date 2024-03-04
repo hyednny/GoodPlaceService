@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import Cors from "cors";
 import { UserRouter } from "../routes/user";
 import path from "path";
+import { PlaceListRouter } from "../routes/place_list";
 
 export function initializeServer() {
   const app = express();
@@ -35,6 +36,7 @@ export function initializeServer() {
   });
 
   app.use("/user", UserRouter);
+  app.use("/placeList", PlaceListRouter);
 
   return app;
 }
