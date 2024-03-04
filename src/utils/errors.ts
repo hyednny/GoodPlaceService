@@ -14,3 +14,9 @@ export class ConflictError extends ErrorTemplate {
     super(message, 409);
   }
 }
+
+export class UnauthorizedError extends ErrorTemplate {
+  constructor(message = "Bad Request") {
+    super(message, 401);
+  }
+}
